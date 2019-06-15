@@ -95,33 +95,6 @@ function setReferenceDefaultFormatting(sheet) {
   return true;
 }
 
-function createSheets(spreadsheetId) {
-  var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
-  var sheets = spreadsheet.getSheets();
-  var sheetNames = [];
-  for (var i = 0; i < sheets.length; i++) {
-    sheetNames.push(sheets[i].getName());
-  }
-  var desiredSheets = [
-    "Volunteers",
-    "Reference",
-    "Events",
-    "Forms",
-    "People",
-    "Tags",
-    "Attendances",
-    "Submissions",
-    "Taggings"
-    ];
-  for (var i = 0; i < desiredSheets.length; i++) {
-    var desiredSheetName = desiredSheets[i];
-    if (sheetNames.indexOf(desiredSheetName) === -1 ) {
-      spreadsheet.insertSheet(desiredSheetName);
-    }
-  }
-  return true;
-}
-
 function setupSheet(sheet, data) {
   var fullRange = sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns());
   fullRange.clear();

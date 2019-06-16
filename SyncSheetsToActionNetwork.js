@@ -159,11 +159,11 @@ function updateFields() {
     return false;
   }
   var headerRow = 1;
-  var lastFieldUpdate = new Date(getSetting("Sunrise.VolunteerTracking.FieldsUpdated"));
-  var lastMemberFieldUpdate = getSetting("Sunrise.VolunteerTracking.MemberFieldsUpdated");
-  if (lastMemberFieldUpdate - lastFieldUpdate < 0) {
-    return null;
-  }
+//  var lastFieldUpdate = new Date(getSetting("Sunrise.VolunteerTracking.FieldsUpdated"));
+//  var lastMemberFieldUpdate = getSetting("Sunrise.VolunteerTracking.MemberFieldsUpdated");
+//  if (lastMemberFieldUpdate - lastFieldUpdate < 0) {
+//    return null;
+//  }
   var sourceSheet = openSheet("People");
   var volunteerSheet = openSheet("Volunteers");
   var volunteerDifferences = getSheetChanges(volunteerSheet, headerRow, sourceSheet, 1, "VolunteerUpdate");
@@ -194,11 +194,11 @@ function submitCallForm() {
     return false;
   }
   var headerRow = 1;
-  var lastSubmission = new Date(getSetting("Sunrise.VolunteerTracking.CallFormSubmitted"));
-  var lastCallFieldUpdate = getSetting("Sunrise.VolunteerTracking.CallFieldsUpdated");
-  if (lastCallFieldUpdate - lastSubmission < 0) {
-    return null;
-  }
+//  var lastSubmission = new Date(getSetting("Sunrise.VolunteerTracking.CallFormSubmitted"));
+//  var lastCallFieldUpdate = getSetting("Sunrise.VolunteerTracking.CallFieldsUpdated");
+//  if (lastCallFieldUpdate - lastSubmission < 0) {
+//    return null;
+//  }
   var sourceSheet = openSheet("People");
   var dataSheet = openSheet("Volunteers");
   var callDifferences = getSheetChanges(dataSheet, headerRow, sourceSheet, 1, "CallForm");

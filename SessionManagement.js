@@ -60,7 +60,7 @@ function closeSession(userId) {
 
 function getAllSessionSettings() {
   var sessionSettings = getSettingsStartWith(getKeyBase());
-  return sessionSettings();
+  return sessionSettings;
 }
 
 function getUsersWithOpenSessions() {

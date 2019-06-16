@@ -117,6 +117,7 @@ function initializeSettings(spreadsheetId) {
     ["GoogleSheets.Color.GreyDark3", "#666666"],
     ["GoogleSheets.Color.GreyDark4", "#434343"],
     ["GoogleSheets.Color.Black", "#000000"],
+    ["Sunrise.VolunteerTracking.AllowForcePushes", "true"],
     ["Sunrise.VolunteerTracking.SpreadsheetID", spreadsheetId],
     ["ActionNetwork.Aep", "https://actionnetwork.org/api/v2/"]]);
 }

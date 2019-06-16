@@ -10,8 +10,9 @@ function onOpen(e) {
     SpreadsheetApp.getUi()
     .createMenu('SAN Integration')
     .addItem('Mark End of Session', 'menuCloseUserSession')
-    .addItem('Set Up Integration', 'menuSetUp')
     .addItem('Push Data to AN', 'menuPushData')
+    .addItem('Set Up Integration', 'menuSetUp')
+    .addItem('Toggle Force Pushes', 'toggleForcePushes')
     .addSeparator()
     .addItem('Help', 'showHelp')
     .addToUi();
@@ -25,7 +26,9 @@ function onOpen(e) {
     .addItem('Help', 'showHelp')
     .addToUi();
   }
-  setDailyPullTrigger();
+  if (e && e.authMode == ScriptApp.AuthMode.FULL) {
+    setDailyPullTrigger();
+  }
 }
 
 function menuSetUp() {
@@ -80,10 +83,10 @@ function menuSetUp() {
 }
 
 function menuPushData() {
-  closeUserSession();
+  menuCloseUserSession();
   var openUsers = getUsersWithOpenSessions();
   var doPush = false;
-  if (openUsers === []) {
+  if (openUsers.length === 0) {
     doPush = true;
   }
   else {
@@ -110,7 +113,7 @@ function displayEditError(openUsers) {
   }
   var ui = SpreadsheetApp.getUi();
   var buttons = ui.ButtonSet.OK;
-  if (userIsOwner()) {
+  if (userIsOwner() || getSetting("Sunrise.VolunteerTracking.AllowForcePushes").toLowerCase() === "true") {
     prompt += '\nDo you wish to force the changes?'
     buttons = ui.ButtonSet.YES_NO;
   }
@@ -176,5 +179,24 @@ function test_onEdit() {
     value : value,
     authMode : "LIMITED"
   });
+}
+
+function toggleForcePushes() {
+  var ui = SpreadsheetApp.getUi();
+  var force = getSetting("Sunrise.VolunteerTracking.AllowForcePushes").toLowerCase();
+  if (force === "false") {
+    var response = ui.alert('This will allow any user to force push changes from the Sheet to Action Network. Click OK to continue.', ui.ButtonSet.OK_CANCEL);
+    if (response === ui.Button.OK) {
+      setSetting("Sunrise.VolunteerTracking.AllowForcePushes", "true");
+      ui.alert('Force pushing has been enabled for all users.');
+    }
+  }
+  else {
+    var response = ui.alert('This will prevent other users (but not you) from force pushing changes from the Sheet to Action Network. Click OK to continue.', ui.ButtonSet.OK_CANCEL);
+    if (response === ui.Button.OK) {
+      setSetting("Sunrise.VolunteerTracking.AllowForcePushes", "false");
+      ui.alert('Force pushing has been disabled for all users other than you.');
+    }
+  }
 }
 

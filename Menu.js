@@ -65,9 +65,10 @@ function menuSetUp() {
       if (validId) {
         if (formButton == ui.Button.OK) {
           ui.alert('Thank you.\nUnfortunately, due to the inherent contraints ' + 
-                   'of a Google Sheets add-on, the services to pull down your ' +
-                   'ActionNetwork data will take several hours. You will know ' +
-                   'this process is complete when the "Volunteers" sheet has content.');
+                   'of a Google Sheets add-on and of the ActionNetwork API, ' +
+                   'the services to pull down your ActionNetwork data will ' + 
+                   'take several hours. You will know this process is complete' + 
+                   ' when the "Volunteers" sheet has content.');
           var spreadsheetId = SpreadsheetApp.getActive().getId();
           initializeIntegration(spreadsheetId, apiKey, formId);
         }
@@ -93,7 +94,15 @@ function menuPushData() {
     doPush = displayEditError(openUsers);
   }
   if (doPush) {
-    setPushTrigger();
+    var ui = SpreadsheetApp.getUi();
+    var response = ui.alert('This process will take some time. If you are updating a handful ' +
+                            'of records, it will take less than a minute. Updating 250 records' + 
+                            ' may take 15 minutes. You will get an alert like this when the ' + 
+                            'data push is complete. It is recommended that you not edit this ' +
+                            'sheet until the process finishes. Press OK to continue.', ui.ButtonSet.OK_CANCEL);
+    if (response === ui.Button.OK) {
+      setPushTrigger();
+    }
   }
 }
 

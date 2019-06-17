@@ -60,7 +60,7 @@ function getColumnLetterFromIndex(index) {
 }
 
 function dumpIntoSheet(sheet, fields, data) {
-  sheet.clear();
+  sheet.clear({contentsOnly: true});
   sheet.setFrozenRows(fields.length);
   var headerRange = sheet.getRange(1, 1, fields.length, fields[0].length);
   headerRange.setValues(fields);
@@ -360,6 +360,17 @@ function deleteFunctionTrigger(functionName) {
   for (var i = 0; i < allTriggers.length; i++) {
     var trigger = allTriggers[i];
     if (trigger.getHandlerFunction() === functionName) {
+      ScriptApp.deleteTrigger(trigger);
+    }
+  }
+  return null;
+}
+
+function deleteClockTriggers() {
+  var allTriggers = ScriptApp.getProjectTriggers();
+  for (var i = 0; i < allTriggers.length; i++) {
+    if (allTriggers[i].getEventType() === ScriptApp.EventType.CLOCK) {
+      var trigger = allTriggers[i];
       ScriptApp.deleteTrigger(trigger);
     }
   }

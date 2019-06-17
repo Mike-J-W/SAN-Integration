@@ -154,7 +154,7 @@ function getSheetChanges(liveSheet, liveHeaderRow, rawSheet, rawHeaderRow, chang
   return differences;
 }
 
-function updateFields() {
+function updateFields(startTime) {
   if (!(checkHealth())) {
     return false;
   }
@@ -181,15 +181,22 @@ function updateFields() {
     if ("custom_fields" in response) {
       updatePersonInSheet(response);
     }
+    var currentTime = new Date();
+    if (startTime != undefined) {
+      var elaspedTime = currentTime - startTime;
+      if (elaspedTime > (330 * 1000)) {
+        return false;
+      }
+    }
   }
   var now = new Date();
   now.setMinutes(now.getMinutes() + 5);
   setSetting("Sunrise.VolunteerTracking.FieldsUpdated", now.toISOString());
   setDailyPullTrigger();
-  return null;
+  return true;
 }
 
-function submitCallForm() {
+function submitCallForm(startTime) {
   if (!(checkHealth())) {
     return false;
   }
@@ -218,12 +225,19 @@ function submitCallForm() {
       appendSubmissionToSheet(response);
       updatePersonInSheet(constructPersonData(personId, personSubmissionInfo));
     }
+    var currentTime = new Date();
+    if (startTime != undefined) {
+      var elaspedTime = currentTime - startTime;
+      if (elaspedTime > (330 * 1000)) {
+        return false;
+      }
+    }
   }
   var now = new Date();
   now.setMinutes(now.getMinutes() + 5);
   setSetting("Sunrise.VolunteerTracking.CallFormSubmitted", now.toISOString());
   setDailyPullTrigger();
-  return null;
+  return true;
 }
 
 function checkHealth() {
@@ -252,14 +266,27 @@ function checkHealth() {
 }
 
 function pushData() {
-  deleteFunctionTrigger("pushData");
-  updateFields();
-  submitCallForm();
-  setDailyPullTrigger();
+  var now = new Date();
+  deleteClockTriggers();
+  var finishedUpdates = updateFields(now);
+  if (finishedUpdates) {
+    var finishedSubmissions = submitCallForm(now);
+    if (finishedSubmissions) {
+      setDailyPullTrigger();
+      var ui = SpreadsheetApp.getUi();
+      ui.alert('Your data push has finished.');
+      return true;
+    }
+  }
+  ScriptApp.newTrigger("pushData")
+  .timeBased()
+  .after(10 * 1000)
+  .create();
+  return false;
 }
 
 function setPushTrigger() {
-  deleteFunctionTrigger("dailyPull");
+  deleteClockTriggers();
   ScriptApp.newTrigger("pushData")
   .timeBased()
   .after(10 * 1000)

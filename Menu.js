@@ -11,6 +11,7 @@ function onOpen(e) {
     .createMenu('SAN Integration')
     .addItem('Mark End of Session', 'menuCloseUserSession')
     .addItem('Push Data to AN', 'menuPushData')
+    .addSeparator()
     .addItem('Set Up Integration', 'menuSetUp')
     .addItem('Toggle Force Pushes', 'toggleForcePushes')
     .addSeparator()
@@ -122,7 +123,7 @@ function displayEditError(openUsers) {
   }
   var ui = SpreadsheetApp.getUi();
   var buttons = ui.ButtonSet.OK;
-  if (userIsOwner() || getSetting("Sunrise.VolunteerTracking.AllowForcePushes").toLowerCase() === "true") {
+  if (getSetting("Sunrise.VolunteerTracking.AllowForcePushes") === true) {
     prompt += '\nDo you wish to force the changes?'
     buttons = ui.ButtonSet.YES_NO;
   }
@@ -192,8 +193,8 @@ function test_onEdit() {
 
 function toggleForcePushes() {
   var ui = SpreadsheetApp.getUi();
-  var force = getSetting("Sunrise.VolunteerTracking.AllowForcePushes").toLowerCase();
-  if (force === "false") {
+  var force = getSetting("Sunrise.VolunteerTracking.AllowForcePushes");
+  if (force === false) {
     var response = ui.alert('This will allow any user to force push changes from the Sheet to Action Network. Click OK to continue.', ui.ButtonSet.OK_CANCEL);
     if (response === ui.Button.OK) {
       setSetting("Sunrise.VolunteerTracking.AllowForcePushes", "true");

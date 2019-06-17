@@ -27,7 +27,7 @@ function getAllSettings() {
 
 function getSettingsStartWith(startsWith) {
   var settingsSheet = openSheet("Settings", true);
-  var data = settingsSheet.getDataRange().getValues;
+  var data = settingsSheet.getDataRange().getValues();
   var settings = {};
   for (var i = 0; i < data.length; i++) {
     var key = data[i][0];

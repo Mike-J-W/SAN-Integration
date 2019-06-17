@@ -69,12 +69,11 @@ function getUsersWithOpenSessions() {
   var sessionCreations = {};
   var sessionClosures = {};
   for (var key in sessionSettings) {
-    var setting = sessionSettings[key];
-    if (setting.lastIndexOf(getCreatedKeyBase()) === 0) {
-      sessionCreations[key.split('|')[1]] = setting;
+    if (key.lastIndexOf(getCreatedKeyBase()) === 0) {
+      sessionCreations[key.split('|')[1]] = sessionSettings[key];
     }
-    else if (setting.lastIndexOf(getClosedKeyBase()) === 0) {
-      sessionClosures[key.split('|')[1]] = setting;
+    else if (key.lastIndexOf(getClosedKeyBase()) === 0) {
+      sessionClosures[key.split('|')[1]] = sessionSettings[key];
     }
   }
   for (var userId in sessionCreations) {

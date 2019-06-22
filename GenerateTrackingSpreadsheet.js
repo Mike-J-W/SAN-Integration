@@ -56,6 +56,10 @@ function getReferenceSetupContents() {
     ["", "", "", "", "", 
      "Disconnected", "", "", "", "", 
      "", "", "", "", "", 
+     ""],
+    ["", "", "", "", "", 
+     "Unknown", "", "", "", "", 
+     "", "", "", "", "", 
      ""]
   ]; 
 }
@@ -449,6 +453,7 @@ function generateTrackingSpreadsheet() {
   var volReferenceValidation = setReferenceValidationRulesByHeaders(volunteersSheet, headerRow, referenceSheet, 1);
   var volTypeValidation = setTypeValidationRulesByHeaders(volunteersSheet, headerRow);
   if (refSetup && volSetup && volConFormat && volFormat && volReferenceValidation && volTypeValidation) {
+    setDailyPullTrigger();
     setSetting("Sunrise.VolunteerTracking.PullingData", "false");
     return true;
   }

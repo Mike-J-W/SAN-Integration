@@ -176,7 +176,7 @@ function initializeIntegration(spreadsheetId, apiKey, formId) {
 
 function dailyPull() {
   deleteFunctionTrigger("dailyPull");
-  if (closeSessions()) {
+  if (closeAllSessions()) {
     pullRawData()
   }
 }

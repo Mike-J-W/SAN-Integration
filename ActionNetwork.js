@@ -128,6 +128,7 @@ function putCustomFieldsToPerson(personId, fieldData) {
   var updateData = {
     "custom_fields": fieldData
   }
+  console.log(updateData);
   var response = makeActionNetworkPutRequest(putUrl, updateData);
   return response;
 }

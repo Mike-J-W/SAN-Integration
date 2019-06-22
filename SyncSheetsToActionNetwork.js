@@ -58,6 +58,7 @@ function compareValuesByUpdateTime(liveObjectsById, rawObjectsById, keyTranslato
 }
 
 function compareValues(liveObjectsById, rawObjectsById, keyTranslator) {
+  var volunteersSheet = openSheet("Volunteers");
   var newObjectValuesById = {};
   for (var liveId in liveObjectsById) {
     var liveObject = liveObjectsById[liveId];
@@ -70,6 +71,10 @@ function compareValues(liveObjectsById, rawObjectsById, keyTranslator) {
         var rawValue = rawObject[rawKey];
         if (rawValue != undefined) {
           if (liveValue != rawValue) {
+            if (liveValue === "") {
+              liveValue = "Unknown";
+              setCellValueByHeaderAndRowID(volunteersSheet, 1, liveKey, liveId, "Unknown");
+            }
             newObjectValues[rawKey] = liveValue;
           }
         }
@@ -177,7 +182,9 @@ function updateFields(startTime) {
     }
   }
   for (var personId in allDifferences) {
+    console.log(personId);
     var response = putCustomFieldsToPerson(personId, allDifferences[personId]);
+    console.log(response);
     if ("custom_fields" in response) {
       updatePersonInSheet(response);
     }
@@ -236,6 +243,7 @@ function submitCallForm(startTime) {
   var now = new Date();
   now.setMinutes(now.getMinutes() + 5);
   setSetting("Sunrise.VolunteerTracking.CallFormSubmitted", now.toISOString());
+  setSetting("Sunrise.VolunteerTracking.PushingData", "false");
   setDailyPullTrigger();
   return true;
 }
@@ -287,6 +295,7 @@ function pushData() {
 
 function setPushTrigger() {
   deleteClockTriggers();
+  setSetting("Sunrise.VolunteerTracking.PushingData", "true");
   ScriptApp.newTrigger("pushData")
   .timeBased()
   .after(10 * 1000)

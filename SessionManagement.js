@@ -93,4 +93,5 @@ function closeAllSessions() {
     var closeSetting = getClosedKeyBase() + userId;
     setSetting(closeSetting, now);
   }
+  return true;
 }

@@ -1,7 +1,7 @@
 function getSpreadsheetId() {
-  var sunriseFolder = getFirstFolder(getSunriseFolderName());
-  var spreadsheet = getFirstFileInFolder(sunriseFolder, getTrackingSpreadsheetName());
-  return spreadsheet.getId();
+  var docProperties = PropertiesService.getDocumentProperties();
+  var id = docProperties.getProperty('SpreadsheetID');
+  return id;
 }
 
 function getSetting(settingName) {
@@ -102,6 +102,7 @@ function appendToSheet(sheet, headerRow, fields, data) {
 
 function openSheet(sheetName, activate) {
   var spreadsheetId = getSpreadsheetId();
+  console.log(spreadsheetId);
   var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
   var sheet = spreadsheet.getSheetByName(sheetName);
   if (activate) {
@@ -330,30 +331,6 @@ function getCellValueByHeaderAndRowId(sheet, headerRow, columnName, rowId) {
   var cellData = columnData[rowId][columnName];
   return cellData;
 } 
-
-function getFirstFolder(folderName) {
-  var folders = DriveApp.getFoldersByName(folderName);
-  if (folders.hasNext()) {
-    return folders.next();
-  }
-  return null;
-}
-
-function getFirstFolderInFolder(parentFolder, childFolderName) {
-  var folders = parentFolder.getFoldersByName(childFolderName);
-  if (folders.hasNext()) {
-    return folders.next();
-  }
-  return null;
-}
-  
-function getFirstFileInFolder(folder, fileName) {
-  var files = folder.getFilesByName(fileName);
-  if (files.hasNext()) {
-    return files.next();
-  }
-  return null;
-}
 
 function deleteFunctionTrigger(functionName) {
   var allTriggers = ScriptApp.getProjectTriggers();

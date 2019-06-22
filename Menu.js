@@ -1,4 +1,8 @@
 function onInstall(e) {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var id = spreadsheet.getId();
+  var docProperties = PropertiesService.getDocumentProperties();
+  docProperties.setProperty('SpreadsheetID', id);
   onOpen(e);
 }
 
@@ -6,7 +10,7 @@ function onOpen(e) {
   if (e && e.authMode == ScriptApp.AuthMode.NONE) {
     return;
   }
-  if (userIsOwner()) {
+//  if (userIsOwner()) {
     SpreadsheetApp.getUi()
     .createMenu('SAN Integration')
     .addItem('Mark End of Session', 'menuCloseUserSession')
@@ -17,16 +21,16 @@ function onOpen(e) {
     .addSeparator()
     .addItem('Help', 'showHelp')
     .addToUi();
-  }
-  else {
-    SpreadsheetApp.getUi()
-    .createMenu('SAN Integration')
-    .addItem('Mark End of Session', 'menuCloseUserSession')
-    .addItem('Push Data to AN', 'menuPushData')
-    .addSeparator()
-    .addItem('Help', 'showHelp')
-    .addToUi();
-  }
+//  }
+//  else {
+//    SpreadsheetApp.getUi()
+//    .createMenu('SAN Integration')
+//    .addItem('Mark End of Session', 'menuCloseUserSession')
+//    .addItem('Push Data to AN', 'menuPushData')
+//    .addSeparator()
+//    .addItem('Help', 'showHelp')
+//    .addToUi();
+//  }
   if (e && e.authMode == ScriptApp.AuthMode.FULL) {
     setDailyPullTrigger();
   }
@@ -188,6 +192,19 @@ function test_onEdit() {
     range : range,
     value : value,
     authMode : "LIMITED"
+  });
+}
+
+function test_onInstall() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = sheet.getRange(3, 13);
+  var value = range.getValue();
+  onInstall({
+    user : Session.getActiveUser(),
+    source : sheet,
+    range : range,
+    value : value,
+    authMode : "FULL"
   });
 }
 

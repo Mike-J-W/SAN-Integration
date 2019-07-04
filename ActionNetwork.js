@@ -150,7 +150,6 @@ function getCorePersonFields() {
     "LastName",
     "EmailAddress",
     "EmailStatus",
-    "Street",
     "City",
     "State",
     "Zip5",

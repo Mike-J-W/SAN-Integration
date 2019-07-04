@@ -5,96 +5,98 @@ function getTrackingSpreadsheetName() {
 function getVolunteersSetupInfo() {
   return [
     ["ActionNetworkID", "First Name", "Last Name", "Pronouns", "Email", 
-     "Phone Number", "Age", "Hub Role", "First Action", "Date of First Action", 
-     "Ladder Status", "Action Network Tags", "Date of Last Call", "Number Dialed on Last Call", "Request of Last Call", 
-     "Outcome of Last Call", "Sunrise 101 - Date Completed", "Sunrise Leadership Training - Date Completed"]
+     "Email Status", "Phone Number", "Age", "Hub Role", "First Action", 
+     "Date of First Action", "Ladder Status", "Member Info", "Action Network Tags", "Date of Last Call", 
+     "Number Dialed on Last Call", "Request of Last Call", "Outcome of Last Call", "Sunrise 101 - Date Completed", "Sunrise Leadership Training - Date Completed"]
   ];
 }
 
 function getReferenceSetupContents() {
   return [
-    ["First Name", "Last Name", "Pronouns", "Email", "Phone Number", 
-     "Hub Role", "First Action", "Date of First Action", "Ladder Status", "Action Network Tags", 
-     "Date of Last Call", "Number Dialed on Last Call", "Request of Last Call", "Outcome of Last Call", "Sunrise 101 - Date Completed",
-     "Sunrise Leadership Training - Date Completed"],
+    ["First Name", "Last Name", "Pronouns", "Email", "Email Status", 
+     "Phone Number", "Hub Role", "First Action", "Date of First Action", "Ladder Status", 
+     "Action Network Tags", "Date of Last Call", "Number Dialed on Last Call", "Request of Last Call", "Outcome of Last Call", 
+     "Sunrise 101 - Date Completed", "Sunrise Leadership Training - Date Completed"],
     ["", "", "They/Them", "", "", 
-     "Hub Coordinator", "", "", "not interested", "", 
-     "", "", "", "No Response", "", 
-     ""],
+     "", "Hub Coordinator", "", "", "not interested", 
+     "", "", "", "", "No Response", 
+     "", ""],
     ["", "", "She/Her", "", "", 
-     "National Liason", "", "", "prospect from national database", "", 
-     "", "", "", "Wrong Number", "", 
-     ""],
+     "", "National Liason", "", "", "prospect from national database", 
+     "", "", "", "", "Wrong Number", 
+     "", ""],
     ["", "", "He/Him", "", "", 
-     "Hub Leader", "", "", "prospect from event", "", 
-     "", "", "", "Remove from Sunrise", "", 
-     ""],
+     "", "Hub Leader", "", "", "prospect from event", 
+     "", "", "", "", "Remove from Sunrise", 
+     "", ""],
     ["", "", "Other", "", "", 
-     "Committee Chair", "", "", "1:1 or hub meeting", "", 
-     "", "", "", "Do Not Call Again", "", 
-     ""],
+     "", "Committee Chair", "", "", "1:1 or hub meeting", 
+     "", "", "", "", "Do Not Call Again", 
+     "", ""],
     ["", "", "", "", "", 
-     "Committee Leader", "", "", "volunteer", "", 
-     "", "", "", "No", "", 
-     ""],
+     "", "Committee Leader", "", "", "volunteer", 
+     "", "", "", "", "No", 
+     "", ""],
     ["", "", "", "", "", 
-     "Committee Member", "", "", "weekly volunteer", "", 
-     "", "", "", "No, but Interested", "", 
-     ""], 
+     "", "Committee Member", "", "", "weekly volunteer", 
+     "", "", "", "", "No, but Interested", 
+     "", ""], 
     ["", "", "", "", "", 
-     "Hub Member", "", "", "leadership role", "", 
-     "", "", "", "Maybe", "", 
-     ""], 
+     "", "Hub Member", "", "", "leadership role", 
+     "", "", "", "", "Maybe", 
+     "", ""], 
     ["", "", "", "", "", 
-     "Participant", "", "", "", "", 
-     "", "", "", "Yes", "", 
-     ""], 
+     "", "Participant", "", "", "", 
+     "", "", "", "", "Yes", 
+     "", ""], 
     ["", "", "", "", "", 
-     "Recipient", "", "", "", "", 
+     "", "Recipient", "", "", "", 
      "", "", "", "", "", 
-     ""], 
+     "", ""], 
     ["", "", "", "", "", 
-     "Disconnected", "", "", "", "", 
+     "", "Disconnected", "", "", "", 
      "", "", "", "", "", 
-     ""],
+     "", ""],
     ["", "", "", "", "", 
-     "Unknown", "", "", "", "", 
+     "", "Unknown", "", "", "", 
      "", "", "", "", "", 
-     ""]
+     "", ""]
   ]; 
 }
 
 function setReferenceDefaultFormatting(sheet) {
+  var fullRange = sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns());
+  fullRange.clearFormat();
   var cellRange = null;
-  cellRange = sheet.getRange(2, 6, 1, 1);
+  cellRange = sheet.getRange(2, 7, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.PurpleLight2"));
-  cellRange = sheet.getRange(3, 6, 1, 1);
+  cellRange = sheet.getRange(3, 7, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.PurpleLight3"));
-  cellRange = sheet.getRange(4, 6, 1, 1);
+  cellRange = sheet.getRange(4, 7, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.BlueLight3"));
-  cellRange = sheet.getRange(5, 6, 1, 1);
+  cellRange = sheet.getRange(5, 7, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.ConflowerBlueLight3"));
-  cellRange = sheet.getRange(6, 6, 1, 1);
+  cellRange = sheet.getRange(6, 7, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.CyanLight3"));
-  cellRange = sheet.getRange(7, 6, 1, 1);
+  cellRange = sheet.getRange(7, 7, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.GreenLight3"));
-  cellRange = sheet.getRange(8, 6, 1, 1);
+  cellRange = sheet.getRange(8, 7, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.YellowLight3"));
-  cellRange = sheet.getRange(9, 6, 1, 1);
+  cellRange = sheet.getRange(9, 7, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.OrangeLight3"));
-  cellRange = sheet.getRange(10, 6, 1, 1);
+  cellRange = sheet.getRange(10, 7, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.OrangeLight2"));
-  cellRange = sheet.getRange(11, 6, 1, 1);
+  cellRange = sheet.getRange(11, 7, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.RedBerryLight3"));  
-  cellRange = sheet.getRange(2, 9, 1, 1);
+  cellRange = sheet.getRange(2, 10, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.RedBerryLight3"));
-  cellRange = sheet.getRange(2, 13, 1, 1);
+  cellRange = sheet.getRange(2, 14, 1, 1);
   cellRange.setFontStyle('italic');
-  cellRange = sheet.getRange(3, 14, 1, 1);
+  cellRange = sheet.getRange(3, 15, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.YellowLight1"));
-  cellRange = sheet.getRange(4, 14, 1, 1);
+  cellRange = sheet.getRange(4, 15, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.RedLight1"));
-  cellRange = sheet.getRange(5, 14, 1, 1);
+  cellRange = sheet.getRange(5, 15, 1, 1);
   cellRange.setBackground(getSetting("GoogleSheets.Color.OrangeLight1"));
   return true;
 }
@@ -259,24 +261,25 @@ function getDefaultReferenceFormatRules(sheet, headerRow) {
   //D = Email
   var emailColumnIndex = headers.indexOf("Email") + 1;
   var emailLetter = getColumnLetterFromIndex(emailColumnIndex);
-  //E = Phone
+  //E = Email Status
+  //F = Phone
   var phoneColumnIndex = headers.indexOf("Phone Number") + 1;
   var phoneLetter = getColumnLetterFromIndex(phoneColumnIndex);
-  //F = Hub Role
-  //G = First Action
-  //H = Date of First Action
-  //I = Ladder Status
+  //G = Hub Role
+  //H = First Action
+  //I = Date of First Action
+  //J = Ladder Status
   var ladderStatusColumnIndex = headers.indexOf("Ladder Status") + 1;
   var ladderStatusLetter = getColumnLetterFromIndex(ladderStatusColumnIndex);
-  //J = Action Network Tags
-  //K = Date of Last Call
-  //L = Number Dialed on Last Call
-  //M = Request of Last Call
-  //N = Outcome of Last Call
+  //K = Action Network Tags
+  //L = Date of Last Call
+  //M = Number Dialed on Last Call
+  //N = Request of Last Call
+  //O = Outcome of Last Call
   var lastCallOutcomeColumnIndex = headers.indexOf("Outcome of Last Call") + 1;
   var lastCallOutcomeLetter = getColumnLetterFromIndex(lastCallOutcomeColumnIndex);
-  //O = Sunrise 101 - Date Completed
-  //P = Sunrise Leadership Training - Date Completed
+  //P = Sunrise 101 - Date Completed
+  //Q = Sunrise Leadership Training - Date Completed
 
   var rule = null;
   var formula = "";
@@ -289,7 +292,7 @@ function getDefaultReferenceFormatRules(sheet, headerRow) {
     sheet.getRange(headerRow, emailColumnIndex, 1, 1),
     sheet.getRange(headerRow, phoneColumnIndex, 1, 1)
     ];
-  formula = '=(INDIRECT("Volunteers!P:P")=INDIRECT("Reference!{0}$4"))';
+  formula = '=(INDIRECT("Volunteers!R:R")=INDIRECT("Reference!{0}$4"))';
   formula = formula.replace(/{0}/g, lastCallOutcomeLetter);
   rule = SpreadsheetApp.newConditionalFormatRule()
   .whenFormulaSatisfied(formula)
@@ -302,7 +305,7 @@ function getDefaultReferenceFormatRules(sheet, headerRow) {
   ranges = [
     sheet.getRange(headerRow, phoneColumnIndex, 1, 1)
     ];
-  formula = '=(INDIRECT("Volunteers!P:P")=INDIRECT("Reference!{0}$5"))';
+  formula = '=(INDIRECT("Volunteers!R:R")=INDIRECT("Reference!{0}$5"))';
   formula = formula.replace(/{0}/g, lastCallOutcomeLetter);
   rule = SpreadsheetApp.newConditionalFormatRule()
   .whenFormulaSatisfied(formula)
@@ -314,7 +317,7 @@ function getDefaultReferenceFormatRules(sheet, headerRow) {
   ranges = [
     sheet.getRange(headerRow, phoneColumnIndex, 1, 1)
     ];
-  formula = '=(INDIRECT("Volunteers!P:P")=INDIRECT("Reference!{0}$3"))';
+  formula = '=(INDIRECT("Volunteers!R:R")=INDIRECT("Reference!{0}$3"))';
   formula = formula.replace(/{0}/g, lastCallOutcomeLetter);
   rule = SpreadsheetApp.newConditionalFormatRule()
   .whenFormulaSatisfied(formula)
@@ -329,7 +332,7 @@ function getDefaultReferenceFormatRules(sheet, headerRow) {
     sheet.getRange(headerRow, emailColumnIndex, 1, 1),
     sheet.getRange(headerRow, phoneColumnIndex, 1, 1)
     ];
-  formula = '=(INDIRECT("Volunteers!K:K")=INDIRECT("Reference!{0}$2"))';
+  formula = '=(INDIRECT("Volunteers!L:L")=INDIRECT("Reference!{0}$2"))';
   formula = formula.replace(/{0}/g, ladderStatusLetter);
   rule = SpreadsheetApp.newConditionalFormatRule()
   .whenFormulaSatisfied(formula)
@@ -344,7 +347,7 @@ function getDefaultReferenceFormatRules(sheet, headerRow) {
     sheet.getRange(headerRow, emailColumnIndex, 1, 1),
     sheet.getRange(headerRow, phoneColumnIndex, 1, 1)
     ];
-  formula = '=AND(OR(INDIRECT("Volunteers!K:K")=INDIRECT("Reference!{0}$4"),INDIRECT("Volunteers!K1:K")=INDIRECT("Reference!{0}$3")),OR(INDIRECT("Volunteers!P1:P")=INDIRECT("Reference!{1}$7"),INDIRECT("Volunteers!P1:P")=INDIRECT("Reference!{1}$8")))';
+  formula = '=AND(OR(INDIRECT("Volunteers!L:L")=INDIRECT("Reference!{0}$4"),INDIRECT("Volunteers!L1:L")=INDIRECT("Reference!{0}$3")),OR(INDIRECT("Volunteers!R1:R")=INDIRECT("Reference!{1}$7"),INDIRECT("Volunteers!R1:R")=INDIRECT("Reference!{1}$8")))';
   formula = formula.replace(/{0}/g, ladderStatusLetter);
   formula = formula.replace(/{1}/g, lastCallOutcomeLetter);
   rule = SpreadsheetApp.newConditionalFormatRule()
@@ -356,6 +359,11 @@ function getDefaultReferenceFormatRules(sheet, headerRow) {
   rules.push(rule);  
 
   return rules;
+}
+
+function clearAllValidationRules(sheet) {
+  var range = sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns());
+  range.clearDataValidations();
 }
 
 function setReferenceValidationRulesByHeaders(targetSheet, targetHeaderRow, referenceSheet, referenceHeaderRow) {
@@ -445,6 +453,7 @@ function generateTrackingSpreadsheet() {
   createSheets(spreadsheetId);
   var referenceSheet = openSheet("Reference");
   var volunteersSheet = openSheet("Volunteers");
+  clearAllValidationRules(volunteersSheet);
   var refSetup = setupReferenceSheet(referenceSheet);
   var volSetup = setupSheet(volunteersSheet, getVolunteersSetupInfo());
   copyPeople(spreadsheetId);

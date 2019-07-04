@@ -1,7 +1,11 @@
 function getSpreadsheetId() {
   var docProperties = PropertiesService.getDocumentProperties();
-  var id = docProperties.getProperty('SpreadsheetID');
-  return id;
+  if (docProperties === null) {
+    return 'ENTER YOUR SPREADSHEET ID HERE';
+  } else {
+    return docProperties.getProperty('SpreadsheetID');
+  }
+  return null;
 }
 
 function getSetting(settingName) {

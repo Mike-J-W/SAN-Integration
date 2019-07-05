@@ -169,8 +169,8 @@ function pullRawData() {
 function initializeIntegration(spreadsheetId, apiKey, formId) {
   createSheets(spreadsheetId);
   initializeSettings(spreadsheetId);
-  setSetting("ActionNetwork.ApiKey", apiKey);
-  setSetting("ActionNetwork.Form.PhoneOutreach.ID", formId);
+  setDocProperty("ActionNetwork.ApiKey", apiKey);
+  setDocProperty("ActionNetwork.Form.PhoneOutreach.ID", formId);
   pullRawData();
 }
 

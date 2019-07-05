@@ -8,6 +8,20 @@ function getSpreadsheetId() {
   return null;
 }
 
+function getDocProperty(propertyName) {
+  var docProperties = PropertiesService.getDocumentProperties();
+  var propertyValue = docProperties.getProperty(propertyName);
+  if (propertyValue === null) {
+    propertyValue = getSetting(propertyName);
+  }
+  return propertyValue;
+}
+
+function setDocProperty(propertyName, propertyValue) {
+  var docProperties = PropertiesService.getDocumentProperties();
+  docProperties.setProperty(propertyName, propertyValue);
+}
+
 function getSetting(settingName) {
   var settingsSheet = openSheet("Settings", true);
   var settings = settingsSheet.getDataRange().getValues();

@@ -71,10 +71,10 @@ function compareValues(liveObjectsById, rawObjectsById, keyTranslator) {
         var rawValue = rawObject[rawKey];
         if (rawValue != undefined) {
           if (liveValue != rawValue) {
-            if (liveValue === "") {
-              liveValue = "Unknown";
-              setCellValueByHeaderAndRowID(volunteersSheet, 1, liveKey, liveId, "Unknown");
-            }
+//            if (liveValue === "") {
+//              liveValue = "Unknown";
+//              setCellValueByHeaderAndRowID(volunteersSheet, 1, liveKey, liveId, "Unknown");
+//            }
             newObjectValues[rawKey] = liveValue;
           }
         }
